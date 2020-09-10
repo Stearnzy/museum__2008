@@ -27,15 +27,10 @@ class Museum
 
 
 
-  # def patrons_by_exhibit_interest
-  #   # @exhibits.each do |exhibit|
-  #   # @patrons.each do |patron|
-  #     @exhibits.group_by do |exhibit|
-  #       @patrons.each do |patron|
-  #         recommend_exhibits(patron)
-  #       end
-  #     end
-  # end
+  def patrons_by_exhibit_interest
+    @exhibits.group_by |patron|
+    
+  end
 
   def ticket_lottery_contestants(exhibit)
     list = []
@@ -45,5 +40,18 @@ class Museum
       end
     end
     list
+  end
+
+  def draw_lottery_winner(exhibit)
+    @lotto_result = ticket_lottery_contestants(exhibit).sample.name
+    @lotto_result
+  end
+
+  def announce_lottery_winner(exhibit)
+    if ticket_lottery_contestants(exhibit) != []
+      p "#{@lotto_result} has won the #{exhibit.name} exhibit lottery"
+    else
+      p "No winners for this lottery"
+    end
   end
 end
